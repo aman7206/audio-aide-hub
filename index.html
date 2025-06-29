@@ -1,24 +1,704 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>audio-aide-hub</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <title>VoiceAI Assistant - Your Intelligent Voice Companion</title>
+    <meta name="description" content="Advanced AI Voice Assistant with voice recognition, web search, and smart automation capabilities" />
+    <meta name="author" content="VoiceAI Team" />
 
-    <meta property="og:title" content="audio-aide-hub" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta property="og:title" content="VoiceAI Assistant" />
+    <meta property="og:description" content="Advanced AI Voice Assistant with intelligent capabilities" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <style>
+      :root {
+        --primary-color: #4f46e5;
+        --secondary-color: #06b6d4;
+        --accent-color: #10b981;
+        --dark-color: #1f2937;
+        --light-color: #f8fafc;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        color: #374151;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--primary-color) !important;
+      }
+
+      .navbar-nav .nav-link {
+        font-weight: 500;
+        color: #6b7280 !important;
+        transition: color 0.3s ease;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: var(--primary-color) !important;
+      }
+
+      .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 120px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      }
+
+      .hero-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      .btn-primary-custom {
+        background: var(--accent-color);
+        border: none;
+        padding: 12px 30px;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      }
+
+      .btn-primary-custom:hover {
+        background: #059669;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+      }
+
+      .feature-card {
+        border: none;
+        border-radius: 20px;
+        padding: 2rem;
+        height: 100%;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        color: white;
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--dark-color);
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        border-radius: 2px;
+      }
+
+      .feedback-section {
+        background: var(--light-color);
+        padding: 80px 0;
+      }
+
+      .feedback-form {
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .form-control {
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 12px 16px;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+      }
+
+      .footer {
+        background: var(--dark-color);
+        color: white;
+        padding: 60px 0 30px;
+      }
+
+      .footer h5 {
+        color: var(--accent-color);
+        margin-bottom: 1.5rem;
+      }
+
+      .footer a {
+        color: #9ca3af;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer a:hover {
+        color: var(--accent-color);
+      }
+
+      .social-icons a {
+        width: 40px;
+        height: 40px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .social-icons a:hover {
+        background: var(--accent-color);
+        transform: translateY(-2px);
+      }
+
+      .success-message {
+        background: linear-gradient(135deg, var(--accent-color), #059669);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        
+        .hero-section {
+          padding: 80px 0;
+        }
+        
+        .feedback-form {
+          padding: 2rem;
+        }
+      }
+
+      .pulse-animation {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="#home">
+          <i class="fas fa-microphone-alt me-2"></i>VoiceAI Assistant
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#features">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#references">References</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-content">
+              <h1 class="hero-title">Meet Your Intelligent Voice Assistant</h1>
+              <p class="hero-subtitle">Experience the future of AI-powered voice interaction with advanced speech recognition, smart automation, and seamless web integration.</p>
+              <div class="d-flex flex-wrap gap-3">
+                <button class="btn btn-primary-custom btn-lg pulse-animation" onclick="startDemo()">
+                  <i class="fas fa-play me-2"></i>Try Demo
+                </button>
+                <button class="btn btn-outline-light btn-lg" onclick="scrollToFeatures()">
+                  <i class="fas fa-arrow-down me-2"></i>Learn More
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="text-center">
+              <div class="position-relative">
+                <i class="fas fa-robot" style="font-size: 15rem; opacity: 0.2;"></i>
+                <div class="position-absolute top-50 start-50 translate-middle">
+                  <div class="bg-white rounded-circle p-4 shadow-lg pulse-animation">
+                    <i class="fas fa-microphone text-primary" style="font-size: 3rem;"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-title">Powerful Features</h2>
+          <p class="lead">Discover what makes our AI Voice Assistant truly exceptional</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="card feature-card text-center">
+              <div class="feature-icon">
+                <i class="fas fa-microphone"></i>
+              </div>
+              <h4 class="mb-3">Voice Recognition</h4>
+              <p>Advanced speech-to-text technology that understands natural language with 99% accuracy across multiple languages and accents.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="card feature-card text-center">
+              <div class="feature-icon">
+                <i class="fas fa-search"></i>
+              </div>
+              <h4 class="mb-3">Smart Web Search</h4>
+              <p>Instantly search the web, get real-time information, and receive intelligent summaries of complex topics through voice commands.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="card feature-card text-center">
+              <div class="feature-icon">
+                <i class="fas fa-cogs"></i>
+              </div>
+              <h4 class="mb-3">Smart Automation</h4>
+              <p>Automate your daily tasks, control smart devices, set reminders, and manage your schedule with simple voice commands.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="card feature-card text-center">
+              <div class="feature-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <h4 class="mb-3">AI Learning</h4>
+              <p>Continuously learns from your preferences and habits to provide personalized responses and proactive assistance.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="card feature-card text-center">
+              <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h4 class="mb-3">Privacy First</h4>
+              <p>Your data stays secure with end-to-end encryption and local processing options for sensitive information.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="card feature-card text-center">
+              <div class="feature-icon">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <h4 class="mb-3">Cross-Platform</h4>
+              <p>Works seamlessly across all your devices - smartphone, tablet, computer, and smart home systems.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2 class="section-title text-start">About VoiceAI Assistant</h2>
+            <p class="lead mb-4">We're revolutionizing how people interact with technology through advanced artificial intelligence and natural language processing.</p>
+            <p class="mb-4">Our AI Voice Assistant combines cutting-edge machine learning algorithms with intuitive voice interaction to create a truly intelligent companion that understands context, learns from interactions, and provides personalized assistance.</p>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-check-circle text-success me-2"></i>
+                  <span>24/7 Availability</span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-check-circle text-success me-2"></i>
+                  <span>Multi-language Support</span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-check-circle text-success me-2"></i>
+                  <span>Offline Capabilities</span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-check-circle text-success me-2"></i>
+                  <span>Regular Updates</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="text-center">
+              <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23f1f5f9'/><circle cx='200' cy='150' r='80' fill='%234f46e5' opacity='0.1'/><circle cx='200' cy='150' r='60' fill='%234f46e5' opacity='0.2'/><circle cx='200' cy='150' r='40' fill='%234f46e5' opacity='0.3'/><circle cx='200' cy='150' r='20' fill='%234f46e5'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='24' font-family='Arial'>AI</text></svg>" alt="AI Visualization" class="img-fluid rounded-4 shadow-lg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- References/Feedback Section -->
+    <section id="references" class="feedback-section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-title">Share Your Experience</h2>
+          <p class="lead">We'd love to hear your feedback and references about our AI Voice Assistant</p>
+        </div>
+        <div class="feedback-form">
+          <form id="feedbackForm">
+            <div class="mb-4">
+              <label for="userName" class="form-label fw-semibold">Your Name</label>
+              <input type="text" class="form-control" id="userName" placeholder="Enter your full name" required>
+            </div>
+            <div class="mb-4">
+              <label for="userEmail" class="form-label fw-semibold">Email Address</label>
+              <input type="email" class="form-control" id="userEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-4">
+              <label for="feedbackType" class="form-label fw-semibold">Feedback Type</label>
+              <select class="form-control" id="feedbackType" required>
+                <option value="">Select feedback type</option>
+                <option value="testimonial">Testimonial</option>
+                <option value="feature-request">Feature Request</option>
+                <option value="bug-report">Bug Report</option>
+                <option value="general">General Feedback</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="feedbackText" class="form-label fw-semibold">Your Feedback or Reference</label>
+              <textarea class="form-control" id="feedbackText" rows="6" placeholder="Share your experience, suggestions, or references about our AI Voice Assistant..." required></textarea>
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                <label class="form-check-label" for="agreeTerms">
+                  I agree to share my feedback and allow it to be used for improvement purposes
+                </label>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary-custom btn-lg w-100">
+              <i class="fas fa-paper-plane me-2"></i>Submit Feedback
+            </button>
+          </form>
+          <div id="successMessage" class="success-message">
+            <i class="fas fa-check-circle me-2"></i>
+            <strong>Thank you!</strong> Your feedback has been successfully submitted. We appreciate your input!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-title">Get In Touch</h2>
+          <p class="lead">Have questions? We're here to help!</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="text-center">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h5>Email Us</h5>
+              <p>support@voiceai-assistant.com</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="text-center">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-phone"></i>
+              </div>
+              <h5>Call Us</h5>
+              <p>+1 (555) 123-4567</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="text-center">
+              <div class="feature-icon mb-3">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <h5>Visit Us</h5>
+              <p>123 AI Street, Tech City, TC 12345</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h5><i class="fas fa-microphone-alt me-2"></i>VoiceAI Assistant</h5>
+            <p class="mb-4">Revolutionizing human-computer interaction through advanced AI voice technology and natural language processing.</p>
+            <div class="social-icons">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2">
+            <h5>Support</h5>
+            <ul class="list-unstyled">
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h5>Contact Info</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-envelope me-2"></i>support@voiceai-assistant.com</li>
+              <li><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</li>
+              <li><i class="fas fa-map-marker-alt me-2"></i>123 AI Street, Tech City, TC 12345</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="my-4">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="mb-0">&copy; 2024 VoiceAI Assistant. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0">Made with <i class="fas fa-heart text-danger"></i> by the VoiceAI Team</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Feedback form validation and submission
+      document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('userName').value.trim();
+        const email = document.getElementById('userEmail').value.trim();
+        const feedbackType = document.getElementById('feedbackType').value;
+        const feedback = document.getElementById('feedbackText').value.trim();
+        const agreeTerms = document.getElementById('agreeTerms').checked;
+        
+        // Validation
+        if (!name || !email || !feedbackType || !feedback || !agreeTerms) {
+          alert('Please fill in all required fields and agree to the terms.');
+          return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+        
+        // Show success message
+        document.getElementById('successMessage').style.display = 'block';
+        
+        // Reset form
+        this.reset();
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          document.getElementById('successMessage').style.display = 'none';
+        }, 5000);
+        
+        // Log feedback data (in real app, this would be sent to server)
+        console.log('Feedback submitted:', {
+          name: name,
+          email: email,
+          type: feedbackType,
+          feedback: feedback,
+          timestamp: new Date().toISOString()
+        });
+      });
+
+      // Demo button functionality
+      function startDemo() {
+        alert('Demo feature would be implemented here! This would start an interactive voice assistant demonstration.');
+      }
+
+      // Scroll to features function
+      function scrollToFeatures() {
+        document.getElementById('features').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+
+      // Add active class to navbar links based on scroll position
+      window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.pageYOffset >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // Add animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observe all feature cards for animation
+      document.querySelectorAll('.feature-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    </script>
   </body>
 </html>
